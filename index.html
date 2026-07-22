@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Serverless compressible Blasius base-flow generator">
+  <title>Compressible Blasius Base-Flow Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">FLAT-PLATE · ZERO PRESSURE GRADIENT</p>
+      <h1>Compressible Blasius<br>Base-Flow Generator</h1>
+      <p class="lede">Generate a reproducible laminar boundary-layer profile entirely in your browser.</p>
+    </div>
+    <div class="status"><span></span> Serverless · local computation</div>
+  </header>
+
+  <main>
+    <section class="panel controls">
+      <div class="section-title"><span>01</span><h2>Flow definition</h2></div>
+      <label class="wide">Preset
+        <select id="preset"></select>
+      </label>
+      <div class="grid">
+        <label>Case name<input id="caseName" type="text"></label>
+        <label>Mach number<input id="mach" type="number" min="0.001" step="any"></label>
+        <label>Edge temperature, T<sub>e</sub> [K]<input id="te" type="number" min="1" step="any"></label>
+        <label>Streamwise station, x [m]<input id="x" type="number" min="1e-8" step="any"></label>
+        <label>γ<input id="gamma" type="number" min="1.001" step="any"></label>
+        <label>Prandtl number<input id="pr" type="number" min="0.01" step="any"></label>
+        <label>Sutherland constant [K]<input id="sutherland" type="number" min="0.01" step="any"></label>
+        <label>Unit Reynolds number [1/m]<input id="unitRe" type="number" min="1" step="any"></label>
+      </div>
+
+      <div class="section-title compact"><span>02</span><h2>Wall & numerics</h2></div>
+      <div class="grid">
+        <label>Thermal condition
+          <select id="wall"><option>Adiabatic</option><option>Isothermal</option></select>
+        </label>
+        <label>Wall temperature, T<sub>w</sub> [K]<input id="tw" type="number" min="1" step="any"></label>
+        <label>Maximum η<input id="etaMax" type="number" min="4" step="any" value="12"></label>
+        <label>Output points<input id="points" type="number" min="201" max="10001" step="100" value="2001"></label>
+      </div>
+      <button id="generate" class="generate">Generate base flow <span>→</span></button>
+      <p id="message" class="message" role="status"></p>
+    </section>
+
+    <section class="panel results">
+      <div class="section-title"><span>03</span><h2>Profile preview</h2></div>
+      <div id="empty" class="empty"><div class="wave">∿</div><p>Choose a condition and generate the base flow.</p></div>
+      <div id="output" hidden>
+        <div class="metrics">
+          <div><small>UNIT RE</small><strong id="mRe"></strong><em>1/m</em></div>
+          <div><small>δ<sub>99</sub></small><strong id="mDelta"></strong><em>mm</em></div>
+          <div><small>WALL T</small><strong id="mTw"></strong><em>K</em></div>
+          <div><small>RESIDUAL</small><strong id="mResidual"></strong></div>
+        </div>
+        <div id="charts" class="charts"></div>
+        <div class="downloads">
+          <button id="csv">Download CSV</button>
+          <button id="json">Download metadata</button>
+          <button id="png">Download plot PNG</button>
+        </div>
+        <p class="note">The graph is rendered immediately from the generated profile. Files remain on this computer until downloaded.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Model:</strong> perfect gas · Sutherland viscosity · zero-pressure-gradient flat plate</p>
+    <p>Adiabatic formulation benchmarked against Oz & Kara (2021), Figure 3. Yin isothermal presets are provided for reproduction work and remain separately subject to validation.</p>
+  </footer>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
