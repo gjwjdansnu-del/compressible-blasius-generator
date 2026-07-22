@@ -2,7 +2,9 @@
 
 A serverless browser application for generating zero-pressure-gradient,
 compressible flat-plate similarity profiles. The application includes the
-Oz--Kara Figure 3 validation cases and Yin (2023) Figure 4 Case 1--3 presets.
+Oz--Kara Figure 3 validation cases and custom flow/wall conditions. It renders
+the generated profiles, streamwise delta-99 growth, and a dimensional
+flat-plate boundary-layer schematic directly in the page.
 
 ## Run locally
 
@@ -24,5 +26,5 @@ with damped Newton shooting. CSV and metadata files are created locally.
 The adiabatic formulation is benchmarked against the BL2D markers reported in
 Oz & Kara (2021), Figure 3, and the browser solver is regression-tested against
 the SciPy `solve_bvp` implementation used in the local validation project.
-Isothermal Yin presets are available for reproduction but are not claimed as an
+Custom isothermal conditions remain available, but are not claimed as an
 independent validation benchmark.

@@ -49,7 +49,7 @@
 
     <section class="panel results">
       <div class="section-title"><span>03</span><h2>Profile preview</h2></div>
-      <div id="empty" class="empty"><div class="wave">∿</div><p>Choose a condition and generate the base flow.</p></div>
+      <div id="schematic" class="schematic" aria-label="Flat-plate boundary-layer schematic"></div>
       <div id="output" hidden>
         <div class="metrics">
           <div><small>UNIT RE</small><strong id="mRe"></strong><em>1/m</em></div>
@@ -57,6 +57,7 @@
           <div><small>WALL T</small><strong id="mTw"></strong><em>K</em></div>
           <div><small>RESIDUAL</small><strong id="mResidual"></strong></div>
         </div>
+        <div id="growthChart" class="growth-wrap"></div>
         <div id="charts" class="charts"></div>
         <div class="downloads">
           <button id="csv">Download CSV</button>
@@ -70,7 +71,7 @@
 
   <footer>
     <p><strong>Model:</strong> perfect gas · Sutherland viscosity · zero-pressure-gradient flat plate</p>
-    <p>Adiabatic formulation benchmarked against Oz & Kara (2021), Figure 3. Yin isothermal presets are provided for reproduction work and remain separately subject to validation.</p>
+    <p>Adiabatic formulation benchmarked against Oz & Kara (2021), Figure 3. Custom adiabatic and isothermal wall conditions are available.</p>
   </footer>
   <script type="module" src="app.js"></script>
 </body>
