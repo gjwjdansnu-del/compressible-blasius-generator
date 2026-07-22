@@ -1,1 +1,1 @@
-{"type":"module","scripts":{"test":"node test_solver.mjs"}}
+{"type":"module","scripts":{"test":"node test_solver.mjs && node test_cone.mjs && node test_validation.mjs"}}

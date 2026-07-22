@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Serverless compressible Blasius base-flow generator">
   <title>Compressible Blasius Base-Flow Generator</title>
-  <link rel="stylesheet" href="styles.css?v=3">
+  <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
   <header class="hero">
@@ -20,18 +20,26 @@
   <main>
     <section class="panel controls">
       <div class="section-title"><span>01</span><h2>Flow definition</h2></div>
+      <label class="wide">Geometry
+        <select id="geometry"><option>Flat plate</option><option>Sharp cone</option></select>
+      </label>
       <label class="wide">Preset
         <select id="preset"></select>
       </label>
+      <label id="conditionSourceWrap" class="wide" hidden>Condition source
+        <select id="conditionSource"><option>Direct edge conditions</option><option>Freestream + Taylor–Maccoll</option></select>
+      </label>
       <div class="grid">
         <label>Case name<input id="caseName" type="text"></label>
-        <label>Mach number<input id="mach" type="number" min="0.001" step="any"></label>
-        <label>Edge temperature, T<sub>e</sub> [K]<input id="te" type="number" min="1" step="any"></label>
-        <label>Streamwise station, x [m]<input id="x" type="number" min="1e-8" step="any"></label>
+        <label><span id="machLabel">Edge Mach number, M<sub>e</sub></span><input id="mach" type="number" min="0.001" step="any"></label>
+        <label><span id="temperatureLabel">Edge temperature, T<sub>e</sub> [K]</span><input id="te" type="number" min="1" step="any"></label>
+        <label><span id="stationLabel">Streamwise station, x [m]</span><input id="x" type="number" min="1e-8" step="any"></label>
         <label>γ<input id="gamma" type="number" min="1.001" step="any"></label>
         <label>Prandtl number<input id="pr" type="number" min="0.01" step="any"></label>
         <label>Sutherland constant [K]<input id="sutherland" type="number" min="0.01" step="any"></label>
-        <label>Unit Reynolds number [1/m]<input id="unitRe" type="number" min="1" step="any"></label>
+        <label><span id="unitReLabel">Edge unit Reynolds number [1/m]</span><input id="unitRe" type="number" min="1" step="any"></label>
+        <label id="pressureWrap" hidden>Freestream pressure, p<sub>∞</sub> [Pa]<input id="pressure" type="number" min="0.001" step="any"></label>
+        <label id="coneAngleWrap" hidden>Cone half-angle [deg]<input id="coneAngle" type="number" min="0.01" max="45" step="any"></label>
       </div>
 
       <div class="section-title compact"><span>02</span><h2>Wall & numerics</h2></div>
@@ -57,9 +65,16 @@
           <div><small>WALL T</small><strong id="mTw"></strong><em>K</em></div>
           <div><small>RESIDUAL</small><strong id="mResidual"></strong></div>
         </div>
+        <div id="edgeSummary" class="edge-summary" hidden></div>
         <div id="growthChart" class="growth-wrap"></div>
         <p id="profileStation" class="profile-station"></p>
         <div id="charts" class="charts"></div>
+        <section id="validationPanel" class="validation-panel" hidden>
+          <h3>NASA 20200002932 · Figure 4 TM reproduction</h3>
+          <p><span class="paper-line"></span> Digitized paper TM &nbsp; <span class="model-line"></span> Current calculation</p>
+          <div id="validationMetrics" class="validation-metrics"></div>
+          <div id="validationCharts" class="validation-charts"></div>
+        </section>
         <div class="downloads">
           <button id="csv">Download CSV</button>
           <button id="json">Download metadata</button>
@@ -71,9 +86,9 @@
   </main>
 
   <footer>
-    <p><strong>Model:</strong> perfect gas · Sutherland viscosity · zero-pressure-gradient flat plate</p>
-    <p>Adiabatic formulation benchmarked against Oz & Kara (2021), Figure 3. Custom adiabatic and isothermal wall conditions are available.</p>
+    <p><strong>Model:</strong> perfect gas · Sutherland viscosity · flat plate or zero-AoA straight sharp cone</p>
+    <p>Flat plate: Oz & Kara (2021), Figure 3. Sharp cone: Taylor–Maccoll edge flow + Mangler transformation, reproduced against NASA 20200002932 Figure 4 TM curves.</p>
   </footer>
-  <script type="module" src="app.js?v=3"></script>
+  <script type="module" src="app.js?v=4"></script>
 </body>
 </html>
