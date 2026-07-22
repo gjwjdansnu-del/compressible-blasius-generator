@@ -26,7 +26,9 @@ runtime; all numerical work is performed in the browser.
 The browser implementation integrates the Oz--Kara similarity equations and
 Taylor--Maccoll equations using fourth-order Runge--Kutta integration. Missing
 wall conditions are solved with damped Newton shooting. CSV and metadata files
-are created locally.
+are created locally. First- and second-order physical wall-normal derivatives
+of velocity and temperature are evaluated analytically from the similarity ODE
+state and included in the generated data for later LST use.
 
 ## Validation scope
 
@@ -35,6 +37,16 @@ Oz & Kara (2021), Figure 3, and the browser solver is regression-tested against
 the SciPy `solve_bvp` implementation used in the local validation project.
 Custom isothermal conditions remain available, but are not claimed as an
 independent validation benchmark.
+
+The flat-plate browser result can be regenerated and plotted directly against
+the digitized BL2D reference with:
+
+```bash
+node tools/export_flat_plate_validation.mjs
+python3 tools/plot_flat_plate_validation.py
+```
+
+The resulting plot and error metrics are written to `validation/`.
 
 The NASA Figure 4 digitization is stored in `validation/figure4_tm.json` and
 can be regenerated with `tools/extract_figure4_tm.py`. `npm test` verifies the
