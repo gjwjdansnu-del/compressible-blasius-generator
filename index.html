@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Serverless compressible Blasius base-flow generator">
   <title>Compressible Blasius Base-Flow Generator</title>
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
   <header class="hero">
@@ -58,6 +58,7 @@
           <div><small>RESIDUAL</small><strong id="mResidual"></strong></div>
         </div>
         <div id="growthChart" class="growth-wrap"></div>
+        <p id="profileStation" class="profile-station"></p>
         <div id="charts" class="charts"></div>
         <div class="downloads">
           <button id="csv">Download CSV</button>
@@ -73,6 +74,6 @@
     <p><strong>Model:</strong> perfect gas · Sutherland viscosity · zero-pressure-gradient flat plate</p>
     <p>Adiabatic formulation benchmarked against Oz & Kara (2021), Figure 3. Custom adiabatic and isothermal wall conditions are available.</p>
   </footer>
-  <script type="module" src="app.js?v=2"></script>
+  <script type="module" src="app.js?v=3"></script>
 </body>
 </html>
